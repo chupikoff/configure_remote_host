@@ -2,7 +2,6 @@
 - name: Configure remote host
   hosts: prod_servers
   become: yes
-  become_user: root
   tasks:
     - name: Create user hes
       user:
