@@ -3,10 +3,16 @@
   hosts: prod_servers
   become: true
   tasks:
+    - name: Install sudo package
+      apt:
+        name: sudo
+        state: present
+    
     - name: Create user hes
       user:
         name: hes
         state: present
+        shell: /bin/bash
     
     - name: Add hes to sudo group
       user:
@@ -63,7 +69,3 @@
     - name: Set timezone to Europe/Amsterdam
       timezone:
         name: Europe/Amsterdam
-    
-    - name: Reboot server
-      reboot:
-        reboot_timeout: 30
