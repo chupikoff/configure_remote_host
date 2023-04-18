@@ -1,3 +1,0 @@
-[prod_servers]
-vps ansible_host=88.85.89.70
-
