@@ -14,12 +14,6 @@
         groups: wheel
         append: yes
     
-    - name: Disable SELinux
-      lineinfile:
-        path: /etc/selinux/config
-        regexp: '^SELINUX='
-        line: 'SELINUX=disabled'
-    
     - name: Allow hes to run sudo without password
       lineinfile:
         path: /etc/sudoers
@@ -51,13 +45,18 @@
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^ListenAddress'
-        line: 'ListenAddress 88.85.89.70'
+        line: 'ListenAddress 78.140.162.212'
     
     - name: Disable root login via SSH
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^PermitRootLogin'
         line: 'PermitRootLogin no'
+
+    - name: Reload SSH service
+      service:
+        name: sshd
+        state: restarted
     
     - name: Add alias to hes's .bashrc
       lineinfile:
@@ -66,10 +65,7 @@
         owner: hes
         group: hes
     
-    - name: Set timezone to Europe/Amsterdam
+    - name: Set timezone to Europe/Kiev
       timezone:
-        name: Europe/Amsterdam
+        name: Europe/Kiev
     
-    - name: Reboot server
-      reboot:
-        reboot_timeout: 30
