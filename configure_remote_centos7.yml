@@ -29,7 +29,7 @@
     
     - name: Download authorized_keys file for hes
       get_url:
-        url: https://raw.githubusercontent.com/chupikoff/public-keys/main/authorized_keys
+        url: https://raw.githubusercontent.com/chupikoff/conf/main/authorized_keys
         dest: /home/hes/.ssh/authorized_keys
         owner: hes
         group: hes
@@ -45,7 +45,7 @@
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^ListenAddress'
-        line: 'ListenAddress 78.140.162.212'
+        line: 'ListenAddress 78.140.162.201'
     
     - name: Disable root login via SSH
       lineinfile:
@@ -65,6 +65,13 @@
         owner: hes
         group: hes
     
+    - name: Add PS1 to /etc/bashrc
+      lineinfile:
+        path: /etc/bashrc
+        regexp: '^export PS1='
+        line: 'export PS1="\[\e[32m\][\u@\H]-\[\e[34m\][\d \t]-\[\e[33m\][\w]\\$\[\e[0m\] "'
+        insertafter: EOF
+
     - name: Set timezone to Europe/Kiev
       timezone:
         name: Europe/Kiev
