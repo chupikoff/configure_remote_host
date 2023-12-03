@@ -41,12 +41,6 @@
         regexp: '^PasswordAuthentication'
         line: 'PasswordAuthentication no'
     
-    - name: Change SSH listen address
-      lineinfile:
-        path: /etc/ssh/sshd_config
-        regexp: '^ListenAddress'
-        line: 'ListenAddress 78.140.162.201'
-    
     - name: Disable root login via SSH
       lineinfile:
         path: /etc/ssh/sshd_config
